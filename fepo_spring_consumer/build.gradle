@@ -1,0 +1,51 @@
+buildscript {
+    repositories {
+        maven { url "https://repo.spring.io/libs-milestone" }
+        //maven { url "http://repo.spring.io/libs-release" }
+        //maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")        
+        classpath("org.springframework.mobile:spring-mobile-device:2.0.0.M3")        
+    }
+
+ 
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'gs-rest-service'
+    version =  '0.1.0'
+}
+
+
+
+
+
+repositories {
+    maven { url "https://repo.spring.io/libs-milestone" }
+    //maven { url "http://repo.spring.io/libs-release" }
+    //maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.mobile:spring-mobile-device:2.0.0.M3")
+    compile("com.h2database:h2")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('com.jayway.jsonpath:json-path')
+}
+
+
+
