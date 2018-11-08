@@ -79,6 +79,16 @@ public class GreetingController {
         return GreetingApplication.repository.findByLastNameRegex(lastName);
     }
 
+    @RequestMapping("/findCustomerById")
+    public Customer findCustomer(@RequestParam(value="id", required = true) Long id) throws Exception{
+
+            Optional<Customer> optional = GreetingApplication.repository.findById(id);
+            if(!optional.isPresent()) return null;
+            return optional.get();
+
+    }
+
+
     @RequestMapping("/addCustomer")
     public ResponseEntity addCustomer(@RequestParam(value="name", required = true) String firstName,
                                       @RequestParam(value="lastName", required = true) String lastName){

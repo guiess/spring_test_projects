@@ -8,3 +8,8 @@
 /fepo_spring_start/lib
 /fepo_spring_start/out
 /fepo_spring_start/target
+/fepo_spring_app/gradle
+/fepo_spring_app/fepo_spring_app.iml
+/fepo_spring_app/.gradle
+/fepo_spring_app/.idea
+/fepo_spring_app/build
