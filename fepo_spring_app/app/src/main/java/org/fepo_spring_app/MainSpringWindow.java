@@ -14,7 +14,8 @@ import org.springframework.web.client.RestTemplate;
 
 public class MainSpringWindow extends AppCompatActivity {
 
-    HttpRequestTask requestTask = new HttpRequestTask();
+    //HttpRequestTask requestTask = new HttpRequestTask();
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +26,14 @@ public class MainSpringWindow extends AppCompatActivity {
     public void onSetConnection(View v){
         System.out.println("onSetConnection start");
         EditText connectionStringText = (EditText) findViewById(R.id.editText);
-        requestTask.setUrl(connectionStringText.getText().toString());
-        System.out.println("requestTask url "+requestTask.url);
+        url = connectionStringText.getText().toString();
+        //requestTask.setUrl(connectionStringText.getText().toString());
+        System.out.println("url "+url);
     }
 
     public void onGetCustomer(View v){
         System.out.println("onGetCustomer start");
-        requestTask.execute();
+        new HttpRequestTask(url).execute();
     }
 
 
@@ -41,6 +43,10 @@ public class MainSpringWindow extends AppCompatActivity {
         private String url = "localhost:8080";
 
         public void setUrl(String url){
+            this.url = url;
+        }
+
+        public HttpRequestTask(String url){
             this.url = url;
         }
 

@@ -25,18 +25,10 @@ public class CustomerJDBCRepository {
 
     public void runJDBCandFillWithData(){
         System.out.println("runJDBCandFillWithData");
-        /*DataSource ds = new SingleConnectionDataSource();
-        ((SingleConnectionDataSource) ds).setUsername("");
-        jdbcTemplate.setDataSource();*/
 
         jdbcTemplate.execute("drop table customers if exists");
         jdbcTemplate.execute("create table customers (id serial, firstname varchar2, lastname varchar2)");
 
-        /*String nameListString = "John Dou; Karl Sagan; Ray Bradburry; Jerald Darrell";
-        for(String names : nameListString.split(";")){
-            String[] name = names.split(" ");
-            jdbcTemplate.execute("insert into customers(firstname, lastname) values(?, ?)");
-        }*/
         List<Object[]> namesList = Arrays.asList("John Dou","Karl Sagan","Ray Bradburry","Jerald Darrell").stream()
                 .map(name -> name.split(" ")).collect(Collectors.toList());
         jdbcTemplate.batchUpdate("insert into customers(firstname, lastname) values(?, ?)", namesList);

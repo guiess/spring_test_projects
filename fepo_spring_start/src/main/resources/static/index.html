@@ -1,0 +1,15 @@
+<html>
+<body>
+    <form method="POST" enctype="multipart/form-data" action="/upload">
+        File to upload: <input type="file" name="file"> <br />
+        Name Prefix: <input type="text" name="prefix"> <br />
+        <br />
+        <input type="submit" value="Upload"> Press to upload
+    </form>
+    <br/>
+    <form action="/loadFile">
+        File to load: <input type="text" name="fileName">
+        <input type="submit" value="Load">
+    </form>
+</body>
+</html>

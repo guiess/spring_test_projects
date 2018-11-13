@@ -35,7 +35,7 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile("org.springframework.mobile:spring-mobile-device:2.0.0.M3")
+    compile("org.springframework.mobile:spring-mobile-device:2.0.0.M3")    
     compile("com.h2database:h2")
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('com.jayway.jsonpath:json-path')

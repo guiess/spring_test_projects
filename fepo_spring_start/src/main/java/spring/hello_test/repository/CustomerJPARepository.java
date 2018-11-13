@@ -10,7 +10,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Date;
 import java.util.List;
 
-public interface CustomerRepository extends CrudRepository<Customer, Long> {
+public interface CustomerJPARepository extends CrudRepository<Customer, Long> {
     public List<Customer> findByLastName(String lastName);
 
     @Query("from Customer where lastName like concat('%', :lastName, '%')")
