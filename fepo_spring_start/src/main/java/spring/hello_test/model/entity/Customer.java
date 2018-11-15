@@ -17,7 +17,7 @@ public class Customer {
     private long id;
     private String firstName;
     private String lastName;
-    private Date currentDate;
+    private Date recordCurrentDate;
 
     protected Customer(){}
 
@@ -49,12 +49,12 @@ public class Customer {
     }
 
 
-    public Date getCurrentDate() {
-        return currentDate;
+    public Date getRecordCurrentDate() {
+        return recordCurrentDate;
     }
 
-    public void setCurrentDate(Date currentDate) {
-        this.currentDate = currentDate;
+    public void setRecordCurrentDate(Date recordCurrentDate) {
+        this.recordCurrentDate = recordCurrentDate;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class Customer {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", currentDate=" + currentDate +
+                ", recordCurrentDate=" + recordCurrentDate +
                 '}';
     }
 

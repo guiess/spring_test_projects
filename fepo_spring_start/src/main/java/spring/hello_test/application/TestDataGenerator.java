@@ -27,7 +27,7 @@ public class TestDataGenerator {
         if(!isNeedToGenerate) return;
 
         jpaFillDB();
-        jdbcFillDB();
+        //jdbcFillDB();
     }
 
     private void jpaFillDB(){

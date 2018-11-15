@@ -5,10 +5,22 @@ ext{
 def updateApplicationProperties() {
     def configFile = new File('src/main/resources/application.properties')
     def authEnabled = hasProperty('auth')? auth: false
-    println "updating application.properties"
+    println "updating application.properties "+authEnabled
     String configContent = configFile.getText('UTF-8')
     configContent = configContent.replaceAll(/spring\.hello_test\.auth=.*/, "spring.hello_test.auth=${authEnabled}")
+
+    def chosenDB = hasProperty('db')? db: 'h2'
+    println "db property "+ chosenDB
+    if(chosenDB == 'h2') {
+        configContent = configContent.replaceAll(/(?m)^spring\.datasource\./, "#spring.datasource.")
+        configContent = configContent.replaceAll(/(?m)^spring\.jpa\./, "#spring.jpa.")
+    }
+    else if(chosenDB == 'postgresql'){
+        configContent = configContent.replaceAll(/#spring\.datasource\./, "spring.datasource.")
+        configContent = configContent.replaceAll(/#spring\.jpa\./, "spring.jpa.")
+    }
     configFile.write(configContent, 'UTF-8')
+
 }
 
 
@@ -54,6 +66,7 @@ dependencies {
     //DB
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("com.h2database:h2")
+    compile("org.postgresql:postgresql")
 
     //security
     compile("org.springframework.boot:spring-boot-starter-security")
@@ -62,6 +75,7 @@ dependencies {
     compile("org.springframework:spring-tx")
     compile("com.unboundid:unboundid-ldapsdk")
 
+    //test
     testCompile("org.springframework.security:spring-security-test")
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('com.jayway.jsonpath:json-path')

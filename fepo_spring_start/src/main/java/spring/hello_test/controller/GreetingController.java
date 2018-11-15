@@ -42,7 +42,7 @@ public class GreetingController {
                 Customer cust = result.get();
                 if (cust != null)
                     return new Greeting(id,
-                            String.format(message_template, cust.getFirstName() + ' ' + cust.getLastName() +' ' + cust.getCurrentDate()));
+                            String.format(message_template, cust.getFirstName() + ' ' + cust.getLastName() +' ' + cust.getRecordCurrentDate()));
             }
 
         }
