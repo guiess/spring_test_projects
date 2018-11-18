@@ -34,6 +34,7 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")        
         classpath("org.springframework.mobile:spring-mobile-device:2.0.0.M3")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin")
     }
 }
 
@@ -62,6 +63,15 @@ dependencies {
         
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.mobile:spring-mobile-device:2.0.0.M3")
+
+    //18.11.tst
+    compile("org.springframework.boot:spring-boot-starter-parent:2.0.1.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    /*
+    compile('org.springframework.boot:spring-boot-starter-tomcat')
+    compile('org.apache.tomcat.embed:tomcat-embed-jasper')
+    compile('javax.servlet:jstl')
+    compile('javax.servlet:javax.servlet-api')*/
 
     //DB
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
