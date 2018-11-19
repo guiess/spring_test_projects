@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-@ConditionalOnProperty(name="spring.hello_test.auth", havingValue="false")
+@ConditionalOnProperty(name="spring.hello_test.auth", havingValue="false", matchIfMissing=true)
 public class DisabledWebSecurityConfigAdapter  extends WebSecurityConfigurerAdapter {
 
     @Override

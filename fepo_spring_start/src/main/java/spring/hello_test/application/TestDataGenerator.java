@@ -19,6 +19,9 @@ public class TestDataGenerator {
     @Autowired
     CustomerJDBCRepository customerJDBCRepository;
 
+    @Autowired
+    AutowiedParametricBeanConsumer autowiedParametricBeanConsumer;
+
     @Value("${spring.hello_test.generate-test-data:false}")
     private Boolean isNeedToGenerate;
 
