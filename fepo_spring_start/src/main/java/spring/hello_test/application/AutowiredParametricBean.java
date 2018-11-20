@@ -12,6 +12,6 @@ public class AutowiredParametricBean {
     }
 
     public void print(){
-        System.out.println(param);
+        System.out.println("AutowiredParametricBean: "+param);
     }
 }

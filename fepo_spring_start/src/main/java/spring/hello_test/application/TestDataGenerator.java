@@ -3,7 +3,11 @@ package spring.hello_test.application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Primary;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.context.ContextLoader;
 import spring.hello_test.model.entity.Customer;
 import spring.hello_test.repository.CustomerJDBCRepository;
 import spring.hello_test.repository.CustomerJPARepository;
@@ -21,6 +25,8 @@ public class TestDataGenerator {
 
     @Autowired
     AutowiedParametricBeanConsumer autowiedParametricBeanConsumer;
+    /*@Autowired
+    AutowiredParametricBean autowiredParametricBean;*/
 
     @Value("${spring.hello_test.generate-test-data:false}")
     private Boolean isNeedToGenerate;
@@ -31,6 +37,18 @@ public class TestDataGenerator {
 
         jpaFillDB();
         //jdbcFillDB();
+
+        //2 types of  instantiation of parametric bean
+        //both will cause disabling of auto-instantiation during autowiring
+        autowiedParametricBeanConsumer.autowiredParametricBean("direct call");
+        //ApplicationContext ctx = new AnnotationConfigApplicationContext(AutowiedParametricBeanConsumer.class);
+        //whis won't properly work without @Scope("prototype")
+        //ctx.getBean("autowiredParametricBean", "getBean call");
+
+        //check which one is autowired
+        //System.out.println("autowiredParametricBean:");
+        //autowiredParametricBean.print();
+
     }
 
     private void jpaFillDB(){
