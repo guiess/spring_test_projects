@@ -11,6 +11,7 @@ import org.springframework.web.context.ContextLoader;
 import spring.hello_test.model.entity.Customer;
 import spring.hello_test.repository.CustomerJDBCRepository;
 import spring.hello_test.repository.CustomerJPARepository;
+import spring.hello_test.service.CustomerService;
 
 import javax.annotation.PostConstruct;
 
@@ -18,10 +19,13 @@ import javax.annotation.PostConstruct;
 @EnableScheduling
 public class TestDataGenerator {
 
-    @Autowired
-    CustomerJPARepository repository;
+    /*@Autowired
+    CustomerJPARepository repository;*/
     @Autowired
     CustomerJDBCRepository customerJDBCRepository;
+
+    @Autowired
+    CustomerService customerService;
 
     @Autowired
     AutowiedParametricBeanConsumer autowiedParametricBeanConsumer;
@@ -55,7 +59,7 @@ public class TestDataGenerator {
         System.out.println("DBDataGerenator jpaFillDB start");
         for(int i=0; i<10; i++) {
             Customer cst = new Customer("name" + i, "surname" + i);
-            repository.save(cst);
+            customerService.saveCustomer(cst);
             System.out.println("DBDataGerenator "+cst);
         }
         System.out.println("DBDataGerenator jpaFillDB end");

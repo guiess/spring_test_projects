@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import spring.hello_test.model.entity.Customer;
 import spring.hello_test.model.entity.CustomerList;
 import spring.hello_test.repository.CustomerJPARepository;
+import spring.hello_test.service.CustomerService;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -24,26 +25,21 @@ public class GreetingController {
 
     private static String message_template = "Hello, %s";
     private static AtomicLong counter = new AtomicLong();
-    
+
     @Autowired
-    CustomerJPARepository repository;
+    CustomerService customerService;
 
     @RequestMapping("/greeting")
     public Greeting greeting(@RequestParam(value="name", required = false, defaultValue = "Guest") String name,
                             @RequestParam(value="id", required = false) Long id){
-        System.out.println("FEPO repository "+repository);
+        System.out.println("FEPO repository "+customerService);
 
         if(id != null){
-            Optional<Customer> result = repository.findById(id);
-            if(!result.isPresent()){
-                name = "not found guest";
-            }
-            else {
-                Customer cust = result.get();
-                if (cust != null)
-                    return new Greeting(id,
-                            String.format(message_template, cust.getFirstName() + ' ' + cust.getLastName() +' ' + cust.getRecordCurrentDate()));
-            }
+            Customer cust = customerService.findById(id);
+
+            if (cust != null)
+                return new Greeting(id,
+                        String.format(message_template, cust.getFirstName() + ' ' + cust.getLastName() +' ' + cust.getRecordCurrentDate()));
 
         }
         return new Greeting(counter.incrementAndGet(),
@@ -53,15 +49,13 @@ public class GreetingController {
     @RequestMapping("/getAllCustomers")
     public Collection<Customer> getAllCustomers(){
         System.out.println("FEPO getAllCustomers");
-        Collection<Customer> result = new ArrayList<>();
-        repository.findAll().forEach(result::add);
-        return result;
+        return customerService.findAll();
     }
 
     @RequestMapping("/getAllCustomersAsObject")
     public CustomerList getAllCustomersAsObject(){
         Collection<Customer> result = new ArrayList<>();
-        repository.findAll().forEach(result::add);
+        customerService.findAll().forEach(result::add);
         return new CustomerList(result);
     }
 
@@ -73,25 +67,22 @@ public class GreetingController {
         if(id == null && firstName == null && lastName == null) return processError("Please indicate any parameter value");
 
         if(id!= null){
-            Optional<Customer> optional = repository.findById(id);
-            if(!optional.isPresent()) return Collections.EMPTY_LIST;
-            return Collections.singletonList(optional.get());
+            Customer customer = customerService.findById(id);
+            return customer==null? Collections.EMPTY_LIST: Collections.singletonList(customer);
         }
 
         if(firstName!= null){
-            return repository.findByFirstName(firstName);
+            return customerService.findByFirstName(firstName);
         }
 
-        return repository.findByLastNameRegex(lastName);
+        return customerService.findByLastNameRegex(lastName);
     }
 
     @RequestMapping("/findCustomerById")
     public Customer findCustomer(@RequestParam(value="id", required = true) Long id) throws Exception{
         System.out.println("FEPO findCustomerById");
 
-        Optional<Customer> optional = repository.findById(id);
-        return optional.isPresent()? optional.get():null;
-
+        return customerService.findById(id);
     }
 
 
@@ -99,7 +90,7 @@ public class GreetingController {
     public ResponseEntity addCustomer(@RequestParam(value="name", required = true) String firstName,
                                       @RequestParam(value="lastName", required = true) String lastName){
         Customer newCustomer = new Customer(firstName, lastName);
-        repository.save(newCustomer);
+        customerService.saveCustomer(newCustomer);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create("/successResult"));

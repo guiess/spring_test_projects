@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface CustomerJPARepository extends JpaRepository<Customer, Long> {
+public interface CustomerJPARepository extends CrudRepository<Customer, Long> {
     public List<Customer> findByLastName(String lastName);
 
     @Query("from Customer where lastName like concat('%', :lastName, '%')")

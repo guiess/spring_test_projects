@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import spring.hello_test.application.AutowiredParametricBean;
 import spring.hello_test.model.entity.Customer;
 import spring.hello_test.repository.CustomerJPARepository;
+import spring.hello_test.service.CustomerService;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,14 +21,12 @@ import java.util.Map;
 public class WebController {
 
     @Autowired
-    CustomerJPARepository repository;
+    CustomerService customerService;
 
     @RequestMapping(value = "/getAllCustomersView")
     public String getAllCustomersView(Map<String, Object> model){
         System.out.println("FEPO getAllCustomers");
-        Collection<Customer> result = new ArrayList<>();
-        repository.findAll().forEach(result::add);
-        model.put("selections", result);
+        model.put("selections", customerService.findAll());
         return "getAllCustomersView";
     }
 }
