@@ -26,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         classes = GreetingApplication.class
 )
 @AutoConfigureMockMvc
+//not necessary in case of inmemory h2, but should be used in case of real db
 @TestPropertySource(
         locations = "classpath:application-integrationtest.properties"
 )
