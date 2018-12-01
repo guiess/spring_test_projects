@@ -1,4 +1,4 @@
-package spring.hello_test.test.sample;
+package spring.hello_test.test.unit;
 
 import org.junit.Before;
 import org.junit.Test;
