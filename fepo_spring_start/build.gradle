@@ -1,5 +1,5 @@
 ext{
-    updateApplicationProperties()
+    //updateApplicationProperties()
 }
 
 def updateApplicationProperties() {

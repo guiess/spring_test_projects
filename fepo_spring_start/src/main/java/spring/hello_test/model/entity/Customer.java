@@ -3,13 +3,11 @@ package spring.hello_test.model.entity;
 import com.sun.javafx.binding.StringFormatter;
 import org.hibernate.validator.constraints.ISBN;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name="Customers")
 public class Customer {
 
     @Id

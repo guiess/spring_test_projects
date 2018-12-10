@@ -25,7 +25,7 @@ public class GreetingApplication {
                 SpringApplication.run(new Class[]{GreetingApplication.class
                         //, ScheduledCustomerUpdateTask.class
                         //, FileUploadApplication.class
-                        , TestDataGenerator.class
+                        //, TestDataGenerator.class
                 }, args);
         System.out.println("FEPO GreetingApplication started");
         LOGGER.debug("GreetingApplication started");
